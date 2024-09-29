@@ -14,6 +14,7 @@ static resmgr_io_funcs_t		io_funcs;
 static iofunc_attr_t			attr;
 
 int my_read_handler(resmgr_context_t *ctp, io_read_t *msg, RESMGR_OCB_T *ocb);
+int my_write_handler(resmgr_context_t *ctp, io_write_t *msg, RESMGR_OCB_T *ocb);
 
 int main(int argc, char **argv)
 {
@@ -39,7 +40,10 @@ int main(int argc, char **argv)
 	// initialize functions for handling messages
 	iofunc_func_init(_RESMGR_CONNECT_NFUNCS, &connect_funcs, \
 					_RESMGR_IO_NFUNCS, &io_funcs);
+
+	// replace it with my handlers
 	io_funcs.read = my_read_handler;
+	io_funcs.write = my_write_handler;
 
 	// initialize attribute structure used by the device
 	iofunc_attr_init(&attr, S_IFNAM | 0666, 0, 0);
