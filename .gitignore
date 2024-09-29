@@ -1,0 +1,12 @@
+# Build Dir
+build/
+
+# Build Artifacts
+*.o
+*.d
+*.a
+*.so
+*.log
+*.tmp
+*.elf
+*.exe
