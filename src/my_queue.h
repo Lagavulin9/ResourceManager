@@ -8,6 +8,7 @@ typedef struct
 	int queue[Q_SIZE];
 	int front;
 	int rear;
+	int size;
 } Queue ;
 
 void initQueue(Queue *q);

@@ -9,12 +9,12 @@ void initQueue(Queue *q)
 
 bool isEmpty(Queue *q)
 {
-	return (q->front == q->rear);
+	return (q->size == 0);
 }
 
 bool isFull(Queue *q)
 {
-	return (q->front == (q->rear + 1) % Q_SIZE);
+	return (q->size == Q_SIZE);
 }
 
 int enQueue(Queue *q, int value)
@@ -22,8 +22,9 @@ int enQueue(Queue *q, int value)
 	if (isFull(q))
 		return -1;
 
-	q->rear = (q->rear + 1) % Q_SIZE;
 	q->queue[q->rear] = value;
+	q->rear = (q->rear + 1) % Q_SIZE;
+	q->size++;
 	return 0;
 }
 
@@ -32,7 +33,8 @@ int deQueue(Queue *q, int *value)
 	if (isEmpty(q))
 		return -1;
 
-	q->front = (q->front + 1) % Q_SIZE;
 	*value = q->queue[q->front];
+	q->front = (q->front + 1) % Q_SIZE;
+	q->size--;
 	return 0;
 }
