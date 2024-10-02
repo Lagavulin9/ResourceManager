@@ -103,7 +103,6 @@ int my_write_handler(resmgr_context_t *ctp, io_write_t *msg, RESMGR_OCB_T *ocb)
 		int mask = 0xffffffff >> (8 * (sizeof(int) - nbytes));
 		buffer &= mask;
 	}
-	printf("Received bytes: %zu, value: %i\n", nbytes, buffer);
 	enQueue(&Q, buffer);
 
 	// update modified, created time
