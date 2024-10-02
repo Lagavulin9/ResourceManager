@@ -1,10 +1,8 @@
-#include <stdbool.h>
 #include "my_queue.h"
 
 void initQueue(Queue *q)
 {
-	q->front = 0;
-	q->rear = 0;
+	memset(q, 0, sizeof(Queue));
 }
 
 bool isEmpty(Queue *q)

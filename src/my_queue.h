@@ -1,6 +1,9 @@
 #ifndef SRC_MY_QUEUE_H_
 # define SRC_MY_QUEUE_H_
 
+#include <stdbool.h>
+#include <string.h>
+
 # define Q_SIZE 10
 
 typedef struct
