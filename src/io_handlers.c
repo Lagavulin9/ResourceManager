@@ -17,10 +17,15 @@ int my_read_handler(resmgr_context_t *ctp, io_read_t *msg, RESMGR_OCB_T *ocb)
 	int		nparts;
 	int		status;
 	int		buffer;
+	int		nonblock;
 
-	status = iofunc_read_verify(ctp, msg, ocb, NULL);
+	status = iofunc_read_verify(ctp, msg, ocb, &nonblock);
 	if (status != EOK)
 		return (status);
+	
+	// if not O_NONBLOCK, it's not implented
+	if (!nonblock)
+		return (ENOSYS);
 
 	// if not _IO_XTYPE_NONE, it's not implemented
 	if ((msg->i.xtype & _IO_XTYPE_MASK) != _IO_XTYPE_NONE)
@@ -66,10 +71,15 @@ int my_write_handler(resmgr_context_t *ctp, io_write_t *msg, RESMGR_OCB_T *ocb)
 	size_t	nbytes;
 	int		status;
 	int		buffer;
+	int		nonblock;
 
-	status = iofunc_write_verify(ctp, msg, ocb, NULL);
+	status = iofunc_write_verify(ctp, msg, ocb, &nonblock);
 	if (status != EOK)
 		return (status);
+
+	// if not O_NONBLOCK, it's not implented
+	if (!nonblock)
+		return (ENOSYS);
 
 	// if not _IO_XTYPE_NONE, it's not implemented
 	if ((msg->i.xtype & _IO_XTYPE_MASK) != _IO_XTYPE_NONE)
